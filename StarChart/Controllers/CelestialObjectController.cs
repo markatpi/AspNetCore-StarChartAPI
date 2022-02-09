@@ -61,6 +61,11 @@ namespace StarChart.Controllers
 
             List<CelestialObject> CelestialObjects = _context.CelestialObjects.ToList();
 
+            foreach (var item in CelestialObjects)
+            {
+                item.Satellites = _context.CelestialObjects.Where(x => x.OrbitedObjectId == item.Id).ToList();
+            }
+
             return Ok(CelestialObjects);
 
         }
